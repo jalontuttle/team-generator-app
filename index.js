@@ -35,32 +35,58 @@ inquirer
         const manager1 = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
         teamList.push(manager1);
         menu();
-        // var markdownTemplate = generateMarkdown(answers);
-        // console.log(markdownTemplate);
-        // fs.writeFile(`index.html`,markdownTemplate, 'utf-8', function (err) {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
-        //         console.log('successful');
-        //     }
-        // })
     });
 
-    function menu(){
-        inquirer
-            .prompt([
-                {
+function menu() {
+    inquirer
+        .prompt([
+            {
                 name: 'team',
                 type: 'list',
                 choices: ['Engineer', 'Intern', 'Finished'],
                 message: 'Would you like to add another team member?',
-                },
-            ])
-            .then(answers => {
-                console.log(answers);
-            })
+            },
+        ]);
+        .then((answers => {
+            console.log(answers);
+
+            if (answers.team === 'Engineer') {
+                engineerQues();
+            }
+            else if (answers.team === 'Intern') {
+                internQues();
+            }
+            else (answers.team === 'Finished') {
+                renderDoc();
+            }
+        })
     }
 
+function engineerQues() {
+    inquirer
+        .prompt([
+            {
+                name: 'name',
+                type: 'input',
+                message: 'What is your name?',
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: 'What is your id number?',
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: 'What is your email?',
+            },
+            {
+                name: 'github',
+                type: 'input',
+                message: 'What is your GitHub username?',
+            },
+        ])
+}
 
 // function generateMarkdown(data) {
 //     return `
