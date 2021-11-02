@@ -26,7 +26,6 @@ inquirer
             name: 'officeNumber',
             type: 'input',
             message: 'What is your office number?',
-        
         },
         
     ])
@@ -46,21 +45,21 @@ function menu() {
                 choices: ['Engineer', 'Intern', 'Finished'],
                 message: 'Would you like to add another team member?',
             },
-        ]);
-        .then((answers => {
+        ])
+        .then((answers) => {
             console.log(answers);
 
-            if (answers.team === 'Engineer') {
-                engineerQues();
-            }
-            else if (answers.team === 'Intern') {
-                internQues();
-            }
-            else (answers.team === 'Finished') {
-                renderDoc();
-            }
+                if (answers.team === 'Engineer') {
+                    engineerQues();
+                }
+                else if (answers.team === 'Intern') {
+                    internQues();
+                }
+                else (answers.team === 'Finished') {
+                    renderDoc();
+                }
         })
-    }
+}
 
 function engineerQues() {
     inquirer
@@ -86,6 +85,44 @@ function engineerQues() {
                 message: 'What is your GitHub username?',
             },
         ])
+        .then((answers) => {
+            console.log(answers)
+            const engineer1 = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            teamList.push(engineer1);
+            menu();
+        })
+}
+
+function internQues() {
+    inquirer
+        .prompt([
+            {
+                name: 'name',
+                type: 'input',
+                message: 'What is your name?',
+            },
+            {
+                name: 'id',
+                type: 'input',
+                message: 'What is your id number?',
+            },
+            {
+                name: 'email',
+                type: 'input',
+                message: 'What is your email?',
+            },
+            {
+                name: 'school',
+                type: 'input',
+                message: 'What school do you currently attend?',
+            },
+        ])
+        .then((answers) => {
+            console.log(answers)
+            const intern1 = new Intern(answers.name, answers.id, answers.email, answers.school);
+            teamList.push(intern1);
+            menu();
+        })
 }
 
 // function generateMarkdown(data) {
