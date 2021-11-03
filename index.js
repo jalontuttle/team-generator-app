@@ -1,6 +1,6 @@
-const Manager = require('./Manager')
-const Engineer = require('./Engineer')
-const Intern = require('./Intern')
+const Manager = require('./lib/Manager')
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
 const inquirer = require('inquirer');
 const fs = require('fs');
 const teamList = [];
@@ -54,10 +54,11 @@ function menu() {
                 }
                 else if (answers.team === 'Intern') {
                     internQues();
+                } 
+                else {
+                    
                 }
-                else (answers.team === 'Finished') {
-                    renderDoc();
-                }
+
         })
 }
 
@@ -91,7 +92,7 @@ function engineerQues() {
             teamList.push(engineer1);
             menu();
         })
-}
+    }
 
 function internQues() {
     inquirer
@@ -123,6 +124,10 @@ function internQues() {
             teamList.push(intern1);
             menu();
         })
+}
+
+function renderDoc() {
+
 }
 
 // function generateMarkdown(data) {
