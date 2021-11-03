@@ -2,8 +2,10 @@ const Manager = require('./lib/Manager')
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const inquirer = require('inquirer');
+const template = require('./generateTemplate')
 const fs = require('fs');
 const teamList = [];
+const idArray = [];
 
 inquirer
     .prompt([
@@ -31,8 +33,9 @@ inquirer
     ])
     .then((answers) => {
         console.log(answers)
-        const manager1 = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-        teamList.push(manager1);
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+        teamList.push(manager);
+        idArray.push(answers.managerId)
         menu();
     });
 
@@ -46,18 +49,17 @@ function menu() {
                 message: 'Would you like to add another team member?',
             },
         ])
-        .then((answers) => {
-            console.log(answers);
-
-                if (answers.team === 'Engineer') {
+        .then(userchoice => {
+            console.log(userchoice);
+            switch (userchoice.team) {
+                case 'Engineer':
                     engineerQues();
-                }
-                else if (answers.team === 'Intern') {
+                    break;
+                case 'Intern':
                     internQues();
-                } 
-                else {
-                    
-                }
+                default:
+                    buildTeam();
+            }
 
         })
 }
@@ -68,28 +70,29 @@ function engineerQues() {
             {
                 name: 'name',
                 type: 'input',
-                message: 'What is your name?',
+                message: 'What is the name of your employee?',
             },
             {
                 name: 'id',
                 type: 'input',
-                message: 'What is your id number?',
+                message: 'What is the id number of your employee?',
             },
             {
                 name: 'email',
                 type: 'input',
-                message: 'What is your email?',
+                message: 'What is the email for your employee?',
             },
             {
                 name: 'github',
                 type: 'input',
-                message: 'What is your GitHub username?',
+                message: 'What is the GitHub username for your employee?',
             },
         ])
         .then((answers) => {
             console.log(answers)
-            const engineer1 = new Engineer(answers.name, answers.id, answers.email, answers.github);
-            teamList.push(engineer1);
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            teamList.push(engineer);
+            idArray.push(answers.engineerId);
             menu();
         })
     }
@@ -100,47 +103,36 @@ function internQues() {
             {
                 name: 'name',
                 type: 'input',
-                message: 'What is your name?',
+                message: 'What is the name of your employee?',
             },
             {
                 name: 'id',
                 type: 'input',
-                message: 'What is your id number?',
+                message: 'What is the id number of your employee?',
             },
             {
                 name: 'email',
                 type: 'input',
-                message: 'What is your email?',
+                message: 'What is the email for your employee?',
             },
             {
                 name: 'school',
                 type: 'input',
-                message: 'What school do you currently attend?',
+                message: 'What school does the employee currently attend?',
             },
         ])
         .then((answers) => {
             console.log(answers)
-            const intern1 = new Intern(answers.name, answers.id, answers.email, answers.school);
-            teamList.push(intern1);
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            teamList.push(intern);
+            idArray.push(answers.internId);
             menu();
         })
 }
 
-function renderDoc() {
-
-}
-
-// function generateMarkdown(data) {
-//     return `
-//     <!DOCTYPE html>
-//     <html lang="en">
-//     <head>
-//         <meta charset="UTF-8">
-//         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         <title>Document</title>
-//     </head>
-//     <body>
-        
-//     </body>
-//     </html>`
+function buildTeam() {
+    const generateTemplate = template();
+    fs.writeFile('index.html', generateTemplate, 'utf-8', (err) => err ?
+        console.log(err) :
+        console.log('Successfully created Team!'))
+}                    
