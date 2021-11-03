@@ -1,5 +1,10 @@
+const Manager = require('./lib/Manager')
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+
 
 function generateTemplate(team){
+    console.log(team);
     return `<!DOCTYPE html>
     <html lang="en">
     
@@ -19,52 +24,52 @@ function generateTemplate(team){
             </div>
         </div>
     
-        <div class="container">${generateTemplate(team)}</div>
+        <div class="container"></div>
     
         <div class="row">
     
             <div class="card employee-card">
                 <div class="card-header">
-                    <h2 class=card-title">${manager.getName()}</h2>
-                    <h3 class="card-title"><i class="fas fa-mug mr-2"></i>${manager.getRole()}</h3>
+                    <h2 class=card-title">${team[0].getName()}</h2>
+                    <h3 class="card-title"><i class="fas fa-mug mr-2"></i>${team[0].getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item">ID: ${manager.getId()}</li>
-                        <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}
+                        <li class="list-group-item">ID: ${team[0].getId()}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${team[0].getEmail()}">${team[0].getEmail()}
                             </a></li>
-                        <li class="list-group-item">Office number: ${manager.getOfficeNumber()}"</li>
+                        <li class="list-group-item">Office number: ${team[0].getOfficeNumber()}"</li>
                     </ul>
                 </div>
             </div>
     
             <div class="card employee-card">
                 <div class="card-header">
-                    <h2 class=card-title">${engineer.getName()}</h2>
-                    <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${engineer.getRole()}</h3>
+                    <h2 class=card-title">${team[1].getName()}</h2>
+                    <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${team[1].getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item">ID: ${engineer.getId()}</li>
-                        <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}
+                        <li class="list-group-item">ID: ${team[1].getId()}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${team[1].getEmail()}">${team[1].getEmail()}
                             </a></li>
-                        <li class="list-group-item">Github: <a href="https://github.com/${engineer.getGithub()}"
-                                target="_blank" rel="">${engineer.getGithub()}</a></li>
+                        <li class="list-group-item">Github: <a href="https://github.com/${team[1].getGithub()}"
+                                target="_blank" rel="">${team[1].getGithub()}</a></li>
                     </ul>
                 </div>
             </div>
     
             <div class="card employee-card">
                 <div class="card-header">
-                    <h2 class=card-title">${intern.getName()}</h2>
-                    <h3 class="card-title"><i class="fas fa-graduate mr-2"></i>${intern.getRole()}</h3>
+                    <h2 class=card-title">${team[2].getName()}</h2>
+                    <h3 class="card-title"><i class="fas fa-graduate mr-2"></i>${team[2].getRole()}</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item">ID: ${intern.getId()}</li>
-                        <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}
+                        <li class="list-group-item">ID: ${team[2].getId()}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${team[2].getEmail()}">${team[2].getEmail()}
                             </a></li>
-                        <li class="list-group-item">School: ${intern.getSchool()}</li>
+                        <li class="list-group-item">School: ${team[2].getSchool()}</li>
                     </ul>
                 </div>
             </div>

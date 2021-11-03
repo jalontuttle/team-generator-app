@@ -58,7 +58,7 @@ function menu() {
                 case 'Intern':
                     internQues();
                 default:
-                    buildTeam();
+                    buildTeam(teamList);
             }
 
         })
@@ -130,9 +130,10 @@ function internQues() {
         })
 }
 
-function buildTeam() {
-    const generateTemplate = template();
+function buildTeam(team) {
+    console.log(team);
+    const generateTemplate = template(team);
     fs.writeFile('index.html', generateTemplate, 'utf-8', (err) => err ?
         console.log(err) :
-        console.log('Successfully created Team!'))
+        console.log('Successful!'))
 }                    
